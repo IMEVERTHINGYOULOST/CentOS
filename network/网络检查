@@ -1,0 +1,32 @@
+因为网络无法ping通
+ping内网ping不通
+ifconfig查到是内网地址
+
+1.查看是否防火墙：
+service iptables status
+service ip6tables status
+将防火墙关闭：
+service iptables stop
+chkconfig iptables off
+service ip6tables stop
+chkconfig ip6tables off
+
+2.能否Ping通自己
+ping localhost
+
+3.查看cat /etc/sysconfig/network-scripts/ifcfg-eth0 
+DEVICE=eth0
+TYPE=Ethernet
+UUID=62070d78-71d8-44f6-bcf5-97cd39fc3d9b
+ONBOOT=yes
+NM_CONTROLLED=yes
+BOOTPROTO=none
+IPADDR=192.168.1.1//内网ip
+PREFIX=24
+DEFROUTE=yes
+IPV4_FAILURE_FATAL=yes
+IPV6INIT=no
+NAME="System eth0"
+HWADDR=18:66:DA:14:69:D3
+LAST_CONNECT=1510903707
+但是怎么Ping192.168.1.2都无法ping通，最后尼玛居然是起了个内网地址，但是网线没插紧，ifconfig还是可以显示，真是被忽悠了
